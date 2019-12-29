@@ -1,6 +1,7 @@
 package guru.springframework.msscbreweryclient.web.client;
 
 import guru.springframework.msscbreweryclient.web.model.BeerDto;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Component;
@@ -31,7 +32,17 @@ public class BreweryClient{
     {
         return restTemplate.postForLocation(apihost+BEER_PATH_V1,beerDto);
     }
+
+    public void updateBeer(UUID uuid,BeerDto beerDto)
+    {
+        restTemplate.put(apihost + BEER_PATH_V1 + uuid.toString(), beerDto);
+    }
+
     public void setApihost(String apihost) {
         this.apihost = apihost;
+    }
+    public void deleteBeer(UUID uuid)
+    {
+        restTemplate.delete(apihost + BEER_PATH_V1 + uuid.toString()+uuid);
     }
 }
