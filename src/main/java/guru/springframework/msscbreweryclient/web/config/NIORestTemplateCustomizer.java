@@ -12,22 +12,12 @@ import org.springframework.http.client.HttpComponentsAsyncClientHttpRequestFacto
 import org.springframework.web.client.RestTemplate;
 
 /**
- * Created by AM on 2019-12-29
+ * Created by jt on 2019-08-07.
  */
 //@Component
 public class NIORestTemplateCustomizer implements RestTemplateCustomizer {
-    @Override
-    public void customize(RestTemplate restTemplate) {
-        try{
-            restTemplate.setRequestFactory(clientHttpRequestFactory());
-        }
-        catch(IOReactorException e)
-        {
-            e.printStackTrace();
-        }
-    }
 
-    public  ClientHttpRequestFactory clientHttpRequestFactory() throws IOReactorException {
+    public ClientHttpRequestFactory clientHttpRequestFactory() throws IOReactorException {
         final DefaultConnectingIOReactor ioreactor = new DefaultConnectingIOReactor(IOReactorConfig.custom().
                 setConnectTimeout(3000).
                 setIoThreadCount(4).
@@ -44,5 +34,14 @@ public class NIORestTemplateCustomizer implements RestTemplateCustomizer {
 
         return new HttpComponentsAsyncClientHttpRequestFactory(httpAsyncClient);
 
+    }
+
+    @Override
+    public void customize(RestTemplate restTemplate) {
+        try {
+            restTemplate.setRequestFactory(clientHttpRequestFactory());
+        } catch (IOReactorException e) {
+            e.printStackTrace();
+        }
     }
 }

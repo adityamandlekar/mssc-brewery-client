@@ -55,9 +55,7 @@ class BreweryClientTest {
     @Test
     void getCustomerById() {
         CustomerDto dto = client.getCustomerById(UUID.randomUUID());
-
         assertNotNull(dto);
-
     }
 
     @Test
