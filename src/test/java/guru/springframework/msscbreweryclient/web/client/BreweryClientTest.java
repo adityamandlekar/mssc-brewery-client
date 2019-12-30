@@ -52,36 +52,5 @@ class BreweryClientTest {
         client.deleteBeer(UUID.randomUUID());
     }
 
-    @Test
-    void getCustomerById() {
-        CustomerDto dto = client.getCustomerById(UUID.randomUUID());
-        assertNotNull(dto);
-    }
 
-    @Test
-    void testSaveNewCustomer() {
-        //given
-        CustomerDto customerDto = CustomerDto.builder().name("Joe").build();
-
-        URI uri = client.saveNewCustomer(customerDto);
-
-        assertNotNull(uri);
-
-        System.out.println(uri.toString());
-
-    }
-
-    @Test
-    void testUpdateCustomer() {
-        //given
-        CustomerDto customerDto = CustomerDto.builder().name("Jim").build();
-
-        client.updateCustomer(UUID.randomUUID(), customerDto);
-
-    }
-
-    @Test
-    void testDeleteCustomer() {
-        client.deleteCustomer(UUID.randomUUID());
-    }
 }
